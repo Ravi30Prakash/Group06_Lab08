@@ -37,7 +37,7 @@ void UART0_Write(char data) {
 }
 
 void LED_Init(void) {
-    // Enable GPIO Port B
+    // Enable GPIO Port F
     SYSCTL_RCGC2_R |= SYSCTL_RCGC2_GPIOF;   // Enable clock for Port F
 
     // Set PB1, PB2, PB3 as output
