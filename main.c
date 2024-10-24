@@ -38,22 +38,21 @@ void UART0_Write(char data) {
 
 void LED_Init(void) {
     // Enable GPIO Port B
-    SYSCTL_RCGCGPIO_R |= (1U << 1); // Enable Port B
+    SYSCTL_RCGC2_R |= SYSCTL_RCGC2_GPIOF;   // Enable clock for Port F
 
     // Set PB1, PB2, PB3 as output
-    GPIO_PORTB_DIR_R |= RED_LED | BLUE_LED | GREEN_LED;
-    GPIO_PORTB_DEN_R |= RED_LED | BLUE_LED | GREEN_LED;
+    GPIO_PORTF_DIR_R |= RED_LED | BLUE_LED | GREEN_LED;
+    GPIO_PORTF_DEN_R |= RED_LED | BLUE_LED | GREEN_LED;
 }
 
 void LED_Control(char color) {
-    // Turn off all LEDs initially
-    GPIO_PORTB_DATA_R &= ~(RED_LED | BLUE_LED | GREEN_LED); // Turn off all LEDs
+    GPIO_PORTF_DATA_R &= ~(RED_LED | BLUE_LED | GREEN_LED); // Turn off all LEDs
     if (color == 'R') {
-        GPIO_PORTB_DATA_R |= RED_LED; // Turn on RED LED
+        GPIO_PORTF_DATA_R |= RED_LED; // Turn on RED LED
     } else if (color == 'B') {
-        GPIO_PORTB_DATA_R |= BLUE_LED; // Turn on BLUE LED
+        GPIO_PORTF_DATA_R |= BLUE_LED; // Turn on BLUE LED
     } else if (color == 'G') {
-        GPIO_PORTB_DATA_R |= GREEN_LED; // Turn on GREEN LED
+        GPIO_PORTF_DATA_R |= GREEN_LED; // Turn on GREEN LED
     }
 }
 
